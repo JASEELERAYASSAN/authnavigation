@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import Home from '../home/Home'
 
-
 function Login(props) {
   //  const {navigation} = props
   const navigation = useNavigation()
@@ -35,6 +34,7 @@ function Login(props) {
         console.log('error', error)
         Alert.alert(error.message)
       })
+
   }
 
   return (
@@ -59,28 +59,27 @@ function Login(props) {
             placeholder="Password"
             secureTextEntry={true} />
           <View style={styles.loginBtnWrapper}>
-            {/******************** LOGIN BUTTON *********************/}
+            {/* LOGIN BUTTON */}
             <TouchableOpacity
               // onPress={login}
               onPress={() => navigation.navigate(ROUTES.HOME)}
               activeOpacity={.7} style={styles.btn}>
               <Text style={styles.text}>LogIn</Text>
             </TouchableOpacity>
-            {/******************** REGISTER BUTTON *********************/}
+            {/* REGISTER BUTTON */}
             <TouchableOpacity
               onPress={register}
-              // onPress={() => navigation.navigate(ROUTES.REGISTER)}
               activeOpacity={.7} style={styles.btn}>
               <Text style={styles.text}>Register</Text>
             </TouchableOpacity>
-            {/***************** FORGOT PASSWORD BUTTON *****************/}
+            {/* FORGOT PASSWORD BUTTON  */}
             <TouchableOpacity onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD, { userId: 'X0001' })} >
               <Text style={styles.forgotPassText}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.footer}>
             <Text style={styles.footerText}> Don't have an account? </Text>
-            {/******************** REGISTER BUTTON *********************/}
+            {/* REGISTER BUTTON  */}
             <TouchableOpacity
               onPress={() => navigation.navigate(ROUTES.REGISTER)}
             >
