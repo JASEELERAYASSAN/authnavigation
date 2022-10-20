@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ROUTES } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
-import Home from '../home/Home'
+
 
 function Login(props) {
   //  const {navigation} = props
@@ -26,15 +26,19 @@ function Login(props) {
       Alert.alert('Both fields are mandatory')
     }
   }
-  const login = () => {
-    auth().createUserWithEmailAndPassword(email, password).then((res) => {
+  const Login = () => {
+    if (email != '' && password != '') {
+    auth().signInWithEmailAndPassword(email, password).then((res) => {
       console.log('response', res)
+      navigation.navigate("Home")
     })
       .catch((error) => {
         console.log('error', error)
         Alert.alert(error.message)
       })
-
+    }else {
+      Alert.alert('Please enter email and password')
+    }
   }
 
   return (
@@ -45,7 +49,7 @@ function Login(props) {
           <View style={styles.row}>
             <Image source={require('../../assets/icons/basketlogo.png')}
               style={styles.logo} />
-            <Text style={styles.brandName}>Anytime Buys</Text>
+            <Text style={styles.brandName}>SnapBuy</Text>
           </View>
           <Text style={styles.loginContinueTxt}>Login in to continue</Text>
           <TextInput style={styles.input}
@@ -61,8 +65,8 @@ function Login(props) {
           <View style={styles.loginBtnWrapper}>
             {/* LOGIN BUTTON */}
             <TouchableOpacity
-              // onPress={login}
-              onPress={() => navigation.navigate(ROUTES.HOME)}
+              onPress={Login}
+              // onPress={() => navigation.navigate(ROUTES.HOME)}
               activeOpacity={.7} style={styles.btn}>
               <Text style={styles.text}>LogIn</Text>
             </TouchableOpacity>
